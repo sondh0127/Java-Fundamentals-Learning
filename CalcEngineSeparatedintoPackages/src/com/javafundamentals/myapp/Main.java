@@ -1,9 +1,38 @@
-package com.javafundamentals.calcengine;
+package com.javafundamentals.myapp;
+
+import com.javafundamentals.calcengine.Adder;
+import com.javafundamentals.calcengine.CalculateBase;
+import com.javafundamentals.calcengine.CalculateHelper;
+import com.javafundamentals.calcengine.Divider;
+import com.javafundamentals.calcengine.DynamicHelper;
+import com.javafundamentals.calcengine.InvalidStatementException;
+import com.javafundamentals.calcengine.MathEquation;
+import com.javafundamentals.calcengine.MathProcessing;
+import com.javafundamentals.calcengine.Multiplier;
+import com.javafundamentals.calcengine.PowerOf;
+import com.javafundamentals.calcengine.Subtractor;
 
 public class Main {
 
     public static void main(String[] args) {
-//        MathEquation testEquation  = new MathEquation();
+//    useCalculateHelper();
+        String[] statements = {
+                "add 25.0 92.0",
+                "power 5.0 2.0"         //5.0 ^ 2.0 = 25.0
+        };
+        DynamicHelper helper = new DynamicHelper(new MathProcessing[] {
+                new Adder(),
+                new PowerOf()
+        });
+        for (String statement : statements) {
+            String output = helper.process(statement);
+            System.out.println(output);
+        }
+
+    }
+
+    static void useCalculateHelper() {
+        //        MathEquation testEquation  = new MathEquation();
 //        testEquation.execute();
 //        System.out.print("test = ");
 //        System.out.println(testEquation.getResult());
@@ -91,7 +120,6 @@ public class Main {
         }
 
     }
-
     public static MathEquation create(double leftVal, double rightVal, char opCode) {
         MathEquation equation = new MathEquation();
         equation.setLeftVal(leftVal);
